@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import AddPanel from './components/AddPanel';
+import UpdatePanel from './components/UpdatePanel';
+import SearchPanel from './components/SearchPanel';
+import SearchResults from './components/SearchResults';
+import database from './data/database.json';
 
-function App() {
+const App = () => {
+  const [data, setData] = useState(database);
+  const [searchResults, setSearchResults] = useState([]);
+
+  const addToDatabase = (newEntry) => {
+    setData([...data, newEntry]);
+  };
+
+  const updateDatabase = (updatedEntry) => {
+    setData(data.map(entry => entry.id === updatedEntry.id ? updatedEntry : entry));
+  };
+
+  const searchDatabase = (query) => {
+    const results = data.filter(entry => entry.name.toLowerCase().includes(query.toLowerCase()));
+    setSearchResults(results);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Search Platform</h1>
+      <AddPanel addToDatabase={addToDatabase} />
+      <UpdatePanel updateDatabase={updateDatabase} data={data} />
+      <SearchPanel searchDatabase={searchDatabase} />
+      <SearchResults results={searchResults} />
     </div>
   );
-}
+};
 
 export default App;

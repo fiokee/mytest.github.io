@@ -1,0 +1,32 @@
+.results {
+    width: 70%;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  h2 {
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .listItem {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .listItem:last-child {
+    border-bottom: none;
+  }
+  
+  .noResults {
+    color: #777;
+  }
+  
